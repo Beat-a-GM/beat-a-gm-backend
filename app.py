@@ -25,9 +25,11 @@ def puzzles():
     return jsonify(data)
 @app.route("/puzzles/<int:id>")
 def puzzles(id):
-    
-    data = supabase.table("Puzzles").select("id").eq(int(id)).execute().data
+    data = supabase.table("Puzzles").select("id").eq(int(id)).execute().data[0]
     return jsonify(data)
-
+@app.route("/puzzles/<string:category>")
+def puzzles(category):
+    data = supabase.table("Puzzles").select("category").eq(int(category)).execute().data
+    return jsonify(data)
 if (__name__ == "__main__"):
     app.run(debug=True)
