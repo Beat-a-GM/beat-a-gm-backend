@@ -18,17 +18,17 @@ supabase = create_client(
 @app.route("/")
 def hello_world():
     return "<p>Hello, World!</p>"
-@app.route("/puzzles")
+@app.route("/puzzles/")
 def puzzles():
     data = supabase.table("Puzzles").select("*").execute().data
     print("data "+str(data))
     return jsonify(data)
-@app.route("/puzzles/<int:id>")
-def puzzles(id):
+@app.route("/puzzles/get/<int:id>")
+def puzzles_id(id):
     data = supabase.table("Puzzles").select("id").eq(int(id)).execute().data[0]
     return jsonify(data)
-@app.route("/puzzles/<string:category>")
-def puzzles(category):
+@app.route("/puzzles/get/category/<string:category>")
+def puzzles_cat(category):
     data = supabase.table("Puzzles").select("category").eq(int(category)).execute().data
     return jsonify(data)
 if (__name__ == "__main__"):
