@@ -21,6 +21,13 @@ def hello_world():
 @app.route("/puzzles")
 def puzzles():
     data = supabase.table("Puzzles").select("*").execute().data
+    print("data "+str(data))
     return jsonify(data)
+@app.route("/puzzles/<int:id>")
+def puzzles(id):
+    
+    data = supabase.table("Puzzles").select("id").eq(int(id)).execute().data
+    return jsonify(data)
+
 if (__name__ == "__main__"):
     app.run(debug=True)
