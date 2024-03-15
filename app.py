@@ -31,5 +31,12 @@ def puzzles_id(id):
 def puzzles_cat(category):
     data = supabase.table("Puzzles").select("*").eq("category", (category)).execute().data
     return jsonify(data)
+@app.route("/categories")
+def get_categories():
+    data = supabase.table("Categories").select("*").execute().data
+    res = []
+    for dict in data:
+        res.append(dict["name"])
+    return jsonify(res)
 if (__name__ == "__main__"):
     app.run(debug=True)
